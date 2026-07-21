@@ -1,0 +1,8 @@
+.DS_Store
+**/.DS_Store
+./data_analysis/**
+./data_processing/**
+./*.sh
+
+# Participant and generated audio
+stage_2_accent_evaluation/data/wav/

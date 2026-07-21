@@ -1,0 +1,97 @@
+{
+  "experiment_config": {
+    "randomize_trials": true,
+    "prolific_audio_speaker_ids": [
+      "testparticipant",
+      "63d0260e307282309d31e2d1",
+      "6721b2f9fbd70d8f384fe844",
+      "69e367400d4ac71729591b85",
+      "6a0dba220c7212bbab66381d",
+      "6a15e7caef5da4a8366e45cf",
+      "6a2786c4c70b7e18a9150a50"
+    ],
+    "preview_audio_speaker_id": "testparticipant",
+    "prolific_completion_code": "CI0L58DH",
+    "debug_completion_url": "https://www.nytimes.com/"
+  },
+  "instruction_page": {
+    "title": "Speech Evaluation Task",
+    "paragraphs": [
+      "In this survey, you will listen to pairs of speech recordings in your own voice.",
+      "For each question, you will compare two speech recordings and rate how similar the <strong>voice identity</strong> and <strong>accent</strong> are between the recordings.",
+      "You will also annotate any specific clues in the sentence that helped you make your decision about the accent similarity rating.",
+      "Please follow the instructions and listen to both speech recordings in full before making any choices."
+    ],
+    "notice": "You should listen to the audio with headphones and in a quiet environment, so you can hear the recordings as clearly as possible.",
+    "question_count": "There will be <strong>{question_count} questions</strong> in total.",
+    "button": "Begin"
+  },
+  "demonstration_page": {
+    "title": "Annotation Demonstration",
+    "paragraphs": [
+      "Before beginning the evaluation, practise identifying accent clues using the two examples below.",
+      "Listen to both recordings in each example, then select only the specific sentence segments that helped you hear an accent difference. These practice responses will not count as experimental questions."
+    ],
+    "example_label": "Practice example {number}",
+    "show_answer_button": "Show answers",
+    "answers_shown_button": "Answers shown",
+    "answer_message": "The example answer segments are outlined in green. Compare them with your selections, then continue to the evaluation.",
+    "answers": {
+      "comma_002": [13, 27, 53, 54, 55],
+      "comma_003": [14, 20, 26, 39, 45]
+    },
+    "button": "Continue to the evaluation"
+  },
+  "attention_checks": {
+    "identical_utterance_id": "comma_004",
+    "cross_speaker_utterance_id": "comma_005"
+  },
+  "final_feedback_page": {
+    "title": "Final Task Feedback",
+    "introduction": "Please answer all three questions before submitting your responses.",
+    "low_label": "Very easy",
+    "high_label": "Very difficult",
+    "similarity_difficulty": {
+      "title": "How difficult were the speaker and accent similarity rating tasks?",
+      "instruction": "Rate the overall difficulty from 1 (very easy) to 5 (very difficult)."
+    },
+    "annotation_difficulty": {
+      "title": "How difficult was the accent clue annotation task?",
+      "instruction": "Rate the overall difficulty from 1 (very easy) to 5 (very difficult)."
+    },
+    "comments": {
+      "title": "Do you have any other comments about the tasks?",
+      "instruction": "Please comment on anything that affected your ratings or annotations. If you have no additional comments, enter ‘No additional comments’.",
+      "placeholder": "Enter your comments here"
+    },
+    "submit_button": "Submit final feedback"
+  },
+  "question_page": {
+    "title": "Speaker and Accent Similarity",
+    "introduction": "Listen carefully to both recordings in full, then answer all questions below.",
+    "reference_audio_label": "Reference speech recording",
+    "candidate_audio_label": "Candidate speech recording",
+    "missing_reference_audio": "Reference audio is not yet available for <code>{utterance_id}</code>.",
+    "missing_candidate_audio": "Candidate audio is not yet available for <code>{utterance_id}</code>.",
+    "submit_button": "Submit response",
+    "speaker_rating": {
+      "title": "Q1. How similar are the speaker identities?",
+      "instruction": "Rate how similar the speaker identities in the two recordings are on a scale from 1 (completely different speakers) to 5 (identical speakers). <strong>Please disregard differences in accent characteristics,</strong> naturalness, or audio quality.",
+      "low_label": "Completely different speakers",
+      "high_label": "Identical speakers"
+    },
+    "accent_rating": {
+      "title": "Q2. How similar are the accents?",
+      "instruction": "Rate how similar the accents in the two recordings are on a scale from 1 (completely different accents) to 5 (identical accents). <strong>Please disregard differences in voice characteristics,</strong> naturalness, or audio quality.",
+      "low_label": "Completely different accents",
+      "high_label": "Identical accents"
+    },
+    "annotation": {
+      "title": "Q3. Perceived Accent Clues Annotation",
+      "paragraphs": [
+        "Highlight only the specific parts of the sentence or word that helped you identify accent differences. For example, select only <em>ter</em> in <em>water</em> if that part made the accents sound different.",
+        "You may annotate perceived differences even if you rated the accents as identical. Leave all parts unselected only if you perceive no accent difference."
+      ]
+    }
+  }
+}
