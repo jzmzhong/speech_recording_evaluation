@@ -1,8 +1,11 @@
 .DS_Store
 **/.DS_Store
-./data_analysis/**
-./data_processing/**
+
+# Data syncing scripts
 ./*.sh
 
-# Participant and generated audio
+# Participant recordings, cloned utterances, and survey responses
 stage_2_accent_evaluation/data/wav/
+data_processing/**
+data_analysis/jsons/**
+data_analysis/results/**

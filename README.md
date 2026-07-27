@@ -15,13 +15,14 @@ This repository contains a two-stage jsPsych study for collecting speech recordi
 |---|---|
 | [`stage_1_prolific_recording/`](stage_1_prolific_recording/) | Stage 1 recording website and upload backend |
 | [`stage_2_accent_evaluation/`](stage_2_accent_evaluation/) | Stage 2 listening, rating, and annotation website |
-<!-- | [`data_processing/`](data_processing/) | Raw recordings, converted audio, segmentation files, and processing scripts |
-| [`data_analysis/`](data_analysis/) | Collected evaluation responses and analysis inputs | -->
+| [`data_processing/`](data_processing/) | Raw recordings, converted audio, segmentation files, and processing scripts |
+| [`data_analysis/`](data_analysis/) | Collected evaluation responses and analysis inputs |
 
 See the stage-specific instructions:
 
 - [Stage 1 README](stage_1_prolific_recording/README.md)
 - [Stage 2 README](stage_2_accent_evaluation/README.md)
+- [Data Analysis README](data_analysis/README.md)
 
 ## Run locally
 
