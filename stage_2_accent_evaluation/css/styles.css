@@ -403,6 +403,21 @@ button:disabled,
   color: #000;
 }
 
+.annotation-token input:disabled:not(:checked) + span {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.annotation-limit-status {
+  margin: -8px 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.annotation-limit-status.at-limit {
+  color: var(--warning);
+}
+
 .annotation-token.demonstration-answer > span {
   outline: 3px solid #16803b;
   outline-offset: 2px;

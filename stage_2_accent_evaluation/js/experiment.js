@@ -364,10 +364,14 @@
             <div class="annotation-sentence" aria-label="Sentence segments to annotate">
               ${renderAnnotationTokens(utterance.text)}
             </div>
+            <p id="annotation-limit-status" class="annotation-limit-status" aria-live="polite"></p>
           </fieldset>
         </section>
       `,
       button_label: content.question_page.submit_button,
+      on_load: () => {
+        setupAnnotationLimit(content.question_page.annotation.max_parts);
+      },
       data: {
         task: options.task || "speaker_and_accent_similarity",
         attention_check_type: options.attentionCheckType || "",
@@ -393,7 +397,8 @@
         data.rating = data.accent_rating;
         const annotationIndices = [...new Set(selectedClues.map(Number))]
           .filter(Number.isInteger)
-          .sort((a, b) => a - b);
+          .sort((a, b) => a - b)
+          .slice(0, content.question_page.annotation.max_parts);
 
         data.annotation = annotationIndices.join("|");
       },
@@ -636,6 +641,31 @@
         ? '<span class="annotation-boundary" aria-hidden="true">·</span>'
         : "");
     }).join("");
+  }
+
+  function setupAnnotationLimit(configuredMaximum) {
+    const maximum = Number.isInteger(configuredMaximum) && configuredMaximum > 0
+      ? configuredMaximum
+      : 10;
+    const inputs = [...document.querySelectorAll('input[name^="accent_clue_"]')];
+    const status = document.querySelector("#annotation-limit-status");
+
+    const update = () => {
+      const selectedCount = inputs.filter((input) => input.checked).length;
+      const atLimit = selectedCount >= maximum;
+      inputs.forEach((input) => {
+        input.disabled = atLimit && !input.checked;
+      });
+      if (status) {
+        status.textContent = atLimit
+          ? `${selectedCount} parts selected. Deselect one part before choosing another.`
+          : `${selectedCount} parts selected.`;
+        status.classList.toggle("at-limit", atLimit);
+      }
+    };
+
+    inputs.forEach((input) => input.addEventListener("change", update));
+    update();
   }
 
   function findCandidateFilename(speakerId, utteranceId, filenames) {

@@ -19,7 +19,7 @@
     "paragraphs": [
       "In this survey, you will listen to pairs of speech recordings in your own voice.",
       "For each question, you will compare two speech recordings and rate how similar the <strong>voice identity</strong> and <strong>accent</strong> are between the recordings.",
-      "You will also annotate any specific clues in the sentence that helped you make your decision about the accent similarity rating.",
+      "You will also annotate any specific clues in the sentence that help you decide how the accents differ. In most cases, you should be able to identify at least one accent clue.",
       "Please follow the instructions and listen to both speech recordings in full before making any choices."
     ],
     "notice": "You should listen to the audio with headphones and in a quiet environment, so you can hear the recordings as clearly as possible.",
@@ -30,7 +30,7 @@
     "title": "Annotation Demonstration",
     "paragraphs": [
       "Before beginning the evaluation, practise identifying accent clues using the two examples below.",
-      "Listen to both recordings in each example, then select only the specific sentence segments that helped you hear an accent difference. These practice responses will not count as experimental questions."
+      "Listen to both recordings in each example, then select the specific subword segments that help you decide how the accents differ. These practice responses will not count as experimental questions."
     ],
     "example_label": "Practice example {number}",
     "show_answer_button": "Show answers",
@@ -88,9 +88,11 @@
     },
     "annotation": {
       "title": "Q3. Perceived Accent Clues Annotation",
+      "max_parts": 10,
       "paragraphs": [
-        "Highlight only the specific parts of the sentence or word that helped you identify accent differences. For example, select only <em>ter</em> in <em>water</em> if that part made the accents sound different.",
-        "You may annotate perceived differences even if you rated the accents as identical. Leave all parts unselected only if you perceive no accent difference."
+        "Highlight only the specific subword segments that helped you identify accent differences. For example, select only <em>ter</em> in <em>water</em> if that part made the accents sound different.",
+        "In most cases, there will be at least one noticeable accent difference, so leave everything unselected only when you genuinely cannot hear any accent clue.",
+        "Do not annotate the whole sentence. In most cases, you will need to select 3 to 7 most obvious subword segments. You may select fewer when only a small difference is audible, but you can never select more than 10 parts. If many parts sound different, choose the 3 to 7 most informative ones."
       ]
     }
   }
