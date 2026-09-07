@@ -1,17 +1,19 @@
 {
   "experiment_config": {
     "randomize_trials": true,
+    "regular_trial_systems": {
+      "maskgct": 20,
+      "f5tts": 20,
+      "ground_truth": 10
+    },
     "prolific_audio_speaker_ids": [
-      "testparticipant",
-      "63d0260e307282309d31e2d1",
-      "6721b2f9fbd70d8f384fe844",
-      "69e367400d4ac71729591b85",
-      "6a0dba220c7212bbab66381d",
-      "6a15e7caef5da4a8366e45cf",
-      "6a2786c4c70b7e18a9150a50"
+      "655a0320c98a1b7408463b87",
+      "6a0742db728334a679327a1b",
+      "6a07e97278622f79319196ac",
+      "6a11344dfa807a229abd5f83"
     ],
-    "preview_audio_speaker_id": "testparticipant",
-    "prolific_completion_code": "C12TYP62",
+    "preview_audio_speaker_id": "655a0320c98a1b7408463b87",
+    "prolific_completion_code": "xxx",
     "debug_completion_url": "https://www.nytimes.com/"
   },
   "instruction_page": {
@@ -43,8 +45,10 @@
     "button": "Continue to the evaluation"
   },
   "attention_checks": {
-    "identical_utterance_id": "comma_004",
-    "cross_speaker_utterance_id": "comma_005"
+    "cross_speaker_utterance_ids": [
+      "comma_004",
+      "comma_005"
+    ]
   },
   "final_feedback_page": {
     "title": "Final Task Feedback",

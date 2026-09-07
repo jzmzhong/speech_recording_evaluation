@@ -11,12 +11,14 @@
   const audioDirectory = getAudioDirectory(audioSpeakerId);
   const participantInfoSheetHtml = await loadParticipantInfoSheet();
   const utterances = await loadJson("data/utterances_segmented.json");
-  const modeUtterances = experimentMode.isDebug ? utterances.slice(0, 2) : utterances;
-  const evaluationUtterances = content.experiment_config.randomize_trials
-    ? shuffleCopy(modeUtterances)
-    : [...modeUtterances];
-  const totalQuestionCount = evaluationUtterances.length + 2;
   const audioFilenames = await discoverAudioFilenames(audioDirectory, audioManifest, audioSpeakerId);
+  const modeUtterances = experimentMode.isDebug ? utterances.slice(0, 2) : utterances;
+  const regularTrialSpecs = createRegularTrialSpecs(
+    modeUtterances,
+    content.experiment_config.regular_trial_systems
+  );
+  const attentionCheckCount = content.attention_checks.cross_speaker_utterance_ids.length;
+  const totalQuestionCount = regularTrialSpecs.length + attentionCheckCount;
   const consentState = { hasConsented: isQuestionPreview ? true : null };
 
   const jsPsych = initJsPsych({
@@ -38,8 +40,8 @@
     source: participantInfo.source,
     experiment_mode: experimentMode.mode,
     utterance_count: totalQuestionCount,
-    experimental_utterance_count: evaluationUtterances.length,
-    attention_check_count: 2,
+    experimental_utterance_count: regularTrialSpecs.length,
+    attention_check_count: attentionCheckCount,
     trials_randomized: Boolean(content.experiment_config.randomize_trials),
     user_agent: navigator.userAgent,
     started_at: new Date().toISOString(),
@@ -213,36 +215,24 @@
     demonstrationDirectory
   );
 
-  const regularTrialSpecs = evaluationUtterances.map((utterance) => ({ utterance }));
-  const identicalUtterance = findUtterance(content.attention_checks.identical_utterance_id);
-  const crossSpeakerUtterance = findUtterance(content.attention_checks.cross_speaker_utterance_id);
-  const targetCandidateFilename = findCandidateFilename(
-    audioSpeakerId,
-    crossSpeakerUtterance.id,
-    audioFilenames
+  const attentionCheckSpecs = content.attention_checks.cross_speaker_utterance_ids.map(
+    (utteranceId) => {
+      const utterance = findUtterance(utteranceId);
+      return {
+        utterance,
+        options: {
+          task: "attention_check",
+          attentionCheckType: `cross_speaker_${utterance.id}`,
+          evaluationSystem: "cross_speaker_ground_truth",
+          trialId: `${utterance.id}_cross_speaker`,
+          referenceFilename: `testparticipant_${utterance.id}.wav`,
+          referenceDirectory: demonstrationDirectory,
+          referenceFilenames: demonstrationFilenames,
+          candidateFilename: `${audioSpeakerId}_${utterance.id}.wav`,
+        },
+      };
+    }
   );
-  const attentionCheckSpecs = [
-    {
-      utterance: identicalUtterance,
-      options: {
-        task: "attention_check",
-        attentionCheckType: "identical_audio",
-        referenceFilename: `${audioSpeakerId}_${identicalUtterance.id}.wav`,
-        candidateFilename: `${audioSpeakerId}_${identicalUtterance.id}.wav`,
-      },
-    },
-    {
-      utterance: crossSpeakerUtterance,
-      options: {
-        task: "attention_check",
-        attentionCheckType: "testparticipant_reference_target_candidate",
-        referenceFilename: `testparticipant_${crossSpeakerUtterance.id}.wav`,
-        referenceDirectory: demonstrationDirectory,
-        referenceFilenames: demonstrationFilenames,
-        candidateFilename: targetCandidateFilename,
-      },
-    },
-  ];
   const trialSpecs = content.experiment_config.randomize_trials
     ? shuffleCopy([...regularTrialSpecs, ...attentionCheckSpecs])
     : [...regularTrialSpecs, ...attentionCheckSpecs];
@@ -257,14 +247,15 @@
       spec.options || {}
     )
   );
-  const previewUtterance = evaluationUtterances[Math.floor(Math.random() * evaluationUtterances.length)];
+  const previewSpec = regularTrialSpecs[Math.floor(Math.random() * regularTrialSpecs.length)];
   const randomPreviewTrial = createEvaluationTrial(
-    previewUtterance,
+    previewSpec.utterance,
     0,
     1,
     audioFilenames,
     audioSpeakerId,
-    audioDirectory
+    audioDirectory,
+    previewSpec.options
   );
   const finalFeedbackTrial = createFinalFeedbackTrial();
 
@@ -378,6 +369,8 @@
         response_type: "speaker_and_accent_smos_rpt",
         trial_order: questionNumber,
         question_id: utterance.id,
+        trial_id: options.trialId || utterance.id,
+        evaluation_system: options.evaluationSystem || "",
         reference_speech: referenceFilename,
         candidate_speech: candidateFilename || "",
         segmented_text: utterance.text,
@@ -668,13 +661,45 @@
     update();
   }
 
-  function findCandidateFilename(speakerId, utteranceId, filenames) {
+  function findCandidateFilename(speakerId, utteranceId, filenames, system = "") {
     const expectedPrefix = `cloned_${speakerId}_${utteranceId}`.toLowerCase();
     return filenames.find((filename) => {
       const lower = filename.toLowerCase();
+      const matchesSystem = !system || lower.endsWith(`_${system.toLowerCase()}.wav`);
       return lower.endsWith(".wav") &&
+        matchesSystem &&
         (lower === `${expectedPrefix}.wav` || lower.startsWith(`${expectedPrefix}_ref_`));
     }) || "";
+  }
+
+  function createRegularTrialSpecs(utteranceItems, systemLimits) {
+    const supportedSystems = ["maskgct", "f5tts", "ground_truth"];
+    return supportedSystems.flatMap((system) => {
+      const configuredLimit = Number(systemLimits?.[system]);
+      const limit = Number.isInteger(configuredLimit) && configuredLimit >= 0
+        ? configuredLimit
+        : utteranceItems.length;
+
+      return utteranceItems.slice(0, limit).map((utterance) => {
+        const options = {
+          evaluationSystem: system,
+          trialId: `${utterance.id}_${system}`,
+        };
+
+        if (system === "ground_truth") {
+          options.candidateFilename = `${audioSpeakerId}_${utterance.id}.wav`;
+        } else {
+          options.candidateFilename = findCandidateFilename(
+            audioSpeakerId,
+            utterance.id,
+            audioFilenames,
+            system
+          );
+        }
+
+        return { utterance, options };
+      });
+    });
   }
 
   function findUtterance(utteranceId) {

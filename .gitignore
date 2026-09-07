@@ -5,7 +5,7 @@
 ./*.sh
 
 # Participant recordings, cloned utterances, and survey responses
-stage_2_accent_evaluation/data/wav/
+stage_2_accent_evaluation/data/wav*/
 data_processing/**
 data_analysis/jsons/**
 data_analysis/results/**
