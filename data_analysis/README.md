@@ -32,6 +32,12 @@ View the annotations for one target speaker (e.g. 63d0260e307282309d31e2d1) with
 http://localhost:1234/results/annotation_viewer.html?TAR_SPK=63d0260e307282309d31e2d1
 - [Deployed](https://sweb.inf.ed.ac.uk/~s2526235/listening_tests/202607_accent_evaluation/data_analysis/results/annotation_viewer.html?TAR_SPK=63d0260e307282309d31e2d1)
 
+To bold selected listeners and place them in the bottom rows, add their comma-separated Prolific IDs with `LISTENERS`:
+
+```text
+http://localhost:1234/results/annotation_viewer.html?TAR_SPK=63d0260e307282309d31e2d1&LISTENERS=listener_id_1,listener_id_2
+```
+
 ### Agreement scores
 
 # Data analysis scripts
@@ -45,4 +51,3 @@ python3 03_calculate_interannotator_agreement.py
 Agreement JSONs separately report agreement among listeners and agreement between the voice donor and listeners.
 
 Target speakers/voice donors without listener data yet are marked `insufficient_listeners`.
-
