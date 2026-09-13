@@ -673,9 +673,16 @@
   }
 
   function createRegularTrialSpecs(utteranceItems, systemLimits) {
-    const supportedSystems = ["maskgct", "f5tts", "ground_truth"];
-    return supportedSystems.flatMap((system) => {
-      const configuredLimit = Number(systemLimits?.[system]);
+    const configuredSystems = systemLimits && typeof systemLimits === "object"
+      ? Object.entries(systemLimits)
+      : [];
+
+    if (configuredSystems.length === 0) {
+      throw new Error("experiment_config.regular_trial_systems must define at least one system.");
+    }
+
+    return configuredSystems.flatMap(([system, configuredValue]) => {
+      const configuredLimit = Number(configuredValue);
       const limit = Number.isInteger(configuredLimit) && configuredLimit >= 0
         ? configuredLimit
         : utteranceItems.length;

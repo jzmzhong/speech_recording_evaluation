@@ -4,16 +4,17 @@
     "regular_trial_systems": {
       "maskgct": 20,
       "f5tts": 20,
-      "ground_truth": 10
+      "sparc": 10
     },
     "prolific_audio_speaker_ids": [
-      "655a0320c98a1b7408463b87",
-      "6a0742db728334a679327a1b",
-      "6a07e97278622f79319196ac",
-      "6a11344dfa807a229abd5f83"
+      "642b3aab1e4144843eb82d33",
+      "665f847f981f9a2e65a2c5d8",
+      "69e8b0adf78ba4d3ede8b1f5",
+      "6a08fea524e9dc84ff9a258a",
+      "6a0ddfabac67ed021930ad91"
     ],
-    "preview_audio_speaker_id": "655a0320c98a1b7408463b87",
-    "prolific_completion_code": "CP69P8KZ",
+    "preview_audio_speaker_id": "642b3aab1e4144843eb82d33",
+    "prolific_completion_code": "CR4ZR4HZ",
     "debug_completion_url": "https://www.nytimes.com/"
   },
   "instruction_page": {
@@ -80,13 +81,13 @@
     "submit_button": "Submit response",
     "speaker_rating": {
       "title": "Q1. How similar are the speaker identities?",
-      "instruction": "Rate how similar the speaker identities in the two recordings are on a scale from 1 (completely different speakers) to 5 (identical speakers). <strong>Please disregard differences in accent characteristics,</strong> naturalness, or audio quality.",
+      "instruction": "Rate how similar the speaker identities in the two recordings are on a scale from 1 (completely different speakers) to 5 (identical speakers). <strong>Please disregard differences in accent characteristics,</strong> naturalness, or audio quality. Consider the full scale and choose the rating that best represents the degree of speaker similarity you hear.",
       "low_label": "Completely different speakers",
       "high_label": "Identical speakers"
     },
     "accent_rating": {
       "title": "Q2. How similar are the accents?",
-      "instruction": "Rate how similar the accents in the two recordings are on a scale from 1 (completely different accents) to 5 (identical accents). <strong>Please disregard differences in voice characteristics,</strong> naturalness, or audio quality.",
+      "instruction": "Rate how similar the accents in the two recordings are on a scale from 1 (completely different accents) to 5 (identical accents). <strong>Please disregard differences in voice characteristics,</strong> naturalness, or audio quality. Consider the full scale and choose the rating that best represents the degree of accent similarity you hear.",
       "low_label": "Completely different accents",
       "high_label": "Identical accents"
     },
