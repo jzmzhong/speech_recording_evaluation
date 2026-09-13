@@ -28,7 +28,7 @@ annotation_value = CSV_GENERATOR.annotation_value
 all_stimuli = CSV_GENERATOR.all_stimuli
 
 WAV_SOURCE_DIR = HERE.parent / "stage_2_accent_evaluation" / "data" / "wav"
-DEFAULT_TARGET_SPEAKER = "xxx"
+DEFAULT_TARGET_SPEAKER = "642b3aab1e4144843eb82d33"
 
 
 def write_annotation_viewer(participants, target_speaker):

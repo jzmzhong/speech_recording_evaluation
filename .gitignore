@@ -9,3 +9,8 @@ stage_2_accent_evaluation/data/wav*/
 data_processing/**
 data_analysis/jsons/**
 data_analysis/results/**
+
+# Python cache files
+__pycache__/
+**/__pycache__/
+*.pyc

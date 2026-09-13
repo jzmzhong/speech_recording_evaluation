@@ -8,7 +8,7 @@ import statistics
 from pathlib import Path
 
 
-BATCH = "batch_2_australian"
+BATCH = "batch_3_australian"
 EVAL_BATCHES = ["participant_data_evaluation_own_voice"]
 RESULTS_FILE = "results_own_voice"
 
