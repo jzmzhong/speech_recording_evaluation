@@ -1,7 +1,7 @@
 (async function () {
   const SAVE_ENDPOINT = "save-recording.cgi";
   const experimentMode = getExperimentMode();
-  const PROLIFIC_COMPLETION_CODE = "CR4ZR4HZ";
+  const PROLIFIC_COMPLETION_CODE = "CTQKD1RZ";
   const COMPLETION_URL = getCompletionUrl();
   const participantInfoSheetHtml = await loadParticipantInfoSheet();
   const consentState = {
