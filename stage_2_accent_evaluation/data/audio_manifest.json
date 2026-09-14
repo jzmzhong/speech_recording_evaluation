@@ -688,5 +688,13 @@
     "cloned_6a033c4bfc7b04cf9a041c4e_wolf_010_ref_comma_008_f5tts.wav",
     "cloned_6a033c4bfc7b04cf9a041c4e_wolf_010_ref_comma_008_maskgct.wav",
     "cloned_6a033c4bfc7b04cf9a041c4e_wolf_010_ref_comma_008_sparc.wav"
+  ],
+  "testparticipant": [
+    "cloned_testparticipant_comma_002_ref_wolf_001_maskgct.wav",
+    "cloned_testparticipant_comma_003_ref_wolf_006_maskgct.wav",
+    "testparticipant_comma_002.wav",
+    "testparticipant_comma_003.wav",
+    "testparticipant_comma_004.wav",
+    "testparticipant_comma_005.wav"
   ]
 }
