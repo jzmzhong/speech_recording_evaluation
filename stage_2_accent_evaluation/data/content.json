@@ -7,14 +7,14 @@
       "sparc": 10
     },
     "prolific_audio_speaker_ids": [
-      "642b3aab1e4144843eb82d33",
-      "665f847f981f9a2e65a2c5d8",
-      "69e8b0adf78ba4d3ede8b1f5",
-      "6a08fea524e9dc84ff9a258a",
-      "6a0ddfabac67ed021930ad91"
+      "5c76615e002a43000104abb2",
+      "5ef405ce2de83f1a2fa278e4",
+      "66fc6008cda3d277a8978dbf",
+      "69f8709095bf5e9416de1057",
+      "6a033c4bfc7b04cf9a041c4e"
     ],
-    "preview_audio_speaker_id": "642b3aab1e4144843eb82d33",
-    "prolific_completion_code": "C1CQ579Y",
+    "preview_audio_speaker_id": "5c76615e002a43000104abb2",
+    "prolific_completion_code": "CR6LSU9H",
     "debug_completion_url": "https://www.nytimes.com/"
   },
   "instruction_page": {
